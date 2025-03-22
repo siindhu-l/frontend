@@ -1,18 +1,18 @@
 document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("login-form").addEventListener("submit", function (event) {
-        event.preventDefault(); // Prevent page refresh
+    document.querySelector("form").addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent form from refreshing the page
 
-        const username = document.getElementById("username").value.trim();
+        const email = document.getElementById("email").value.trim();
         const password = document.getElementById("password").value.trim();
 
-        if (!username || !password) {
-            alert("Please enter both username and password.");
+        if (!email || !password) {
+            alert("Please enter both email and password.");
             return;
         }
 
-        const loginData = { username, password };
+        const loginData = { email, password };
 
-        fetch("http://localhost:3000/admin-login", {
+        fetch("http://localhost:3000/driver-login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(loginData)
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(data => {
             if (data.success) {
                 alert("Login successful! Redirecting...");
-                window.location.href = "admin_dashboard.html"; // Redirect to admin dashboard
+                window.location.href = "dashboard.html"; // Redirect to driver dashboard
             } else {
                 alert("Login failed: " + data.message);
             }
